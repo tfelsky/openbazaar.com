@@ -82,11 +82,13 @@ class Store extends CI_Controller
 			$ratings_load = @loadFile("https://gateway.ob1.io/ipns/" . $peerID . "/ratings.json");
 			if ($ratings_load !== FALSE) {
 				$ratings = json_decode($ratings_load);
-				foreach($ratings as $r) {
-					if ($r->slug == $listing->listing->slug) {
-						$rating = $r->average;
-						$rating_count = $r->count;
-						$listing_ratings = $r->ratings;
+				if($ratings) {
+					foreach($ratings as $r) {
+						if ($r->slug == $listing->listing->slug) {
+							$rating = $r->average;
+							$rating_count = $r->count;
+							$listing_ratings = $r->ratings;
+						}
 					}
 				}
 			}
